@@ -1,7 +1,7 @@
 import flask
 def BreakSudoku(mtx):
     from subprocess import Popen, PIPE
-    p=Popen('/app/solver',stdin=PIPE,stdout=PIPE)
+    p=Popen('./solver',stdin=PIPE,stdout=PIPE)
     s=[]
     for row in mtx:
         for col in row: s.append(str(col))
