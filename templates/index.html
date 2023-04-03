@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{url_for('static',filename='script.js')}}" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>BreakSudoku</title>
+</head>
+<body>
+    <h1>BreakSudoku</h1>
+    <table class="sudokuTable">
+        {%for row in tbl%}
+            <tr>
+                {%for col in row%}
+                <td id="sudoku{{col[1]}}">{%if col[0]>0%}{{col[0]}}{%else%}{{" "}}{%endif%}</td>
+                {%endfor%}
+            </tr>
+        {%endfor%}
+    </table>
+    <div id="waring">error input</div>
+    <div class="numberBar">
+        <button class="nButton" id="erase">erase</button>
+        <button class="nButton" id="n1">1</button>
+        <button class="nButton" id="n2">2</button>
+        <button class="nButton" id="n3">3</button>
+        <button class="nButton" id="n4">4</button>
+        <button class="nButton" id="n5">5</button>
+        <button class="nButton" id="n6">6</button>
+        <button class="nButton" id="n7">7</button>
+        <button class="nButton" id="n8">8</button>
+        <button class="nButton" id="n9">9</button>
+    </div>
+    <div class="functionBar">
+        <button id="submit" class="BarButton">Solve</button>
+        <button id="clear" class="BarButton">Clean</button>
+    </div>
+</body>
+</html>

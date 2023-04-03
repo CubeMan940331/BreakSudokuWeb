@@ -1,0 +1,64 @@
+html{
+    background-color: rgb(37, 37, 38);
+    color: white;
+}
+h1{
+    text-align: center;
+}
+td{
+    margin: 0px;
+    padding: 0px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: x-large;
+    border: 2px solid rgb(64,64,64);
+    background-color: rgb(45,45,45);
+}
+.sudokuTable {
+    margin: auto;
+    border-collapse: collapse;
+}
+#waring{
+    visibility: hidden;
+    font-size: x-large;
+    margin: 10px;
+    color: red;
+    text-align: center;
+}
+.numberBar{
+    margin: 10px;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.functionBar{
+    margin: 20px;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+}
+.nButton{
+    color: black;
+    margin: 2px;
+    text-align: center;
+    border: 0px;
+    height: 30px;
+    border-radius: 8px;
+    background-color: rgb(73,154,255);
+}
+
+.BarButton{
+    color: black;
+    font-size: large;
+    margin: 2px;
+    text-align: center;
+    border: 0px;
+    height: 30px;
+    border-radius: 8px;
+    background-color: rgb(73,154,255);
+}
+.BarButton:hover{
+    background-color: rgb(16, 76, 149);
+}
