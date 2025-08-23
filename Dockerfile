@@ -1,9 +1,9 @@
-FROM python:3.9
+FROM python
 
 WORKDIR /app
 COPY . /app
 
 RUN pip3 install -r requirements.txt
-RUN g++ solve.cpp -O2 -std=c++11 -o solver
+RUN make
 
-CMD gunicorn -w 4 -b 0.0.0.0:3001 app:app
+CMD ["gunicorn", "-w 4", "-b 0.0.0.0:3001", "app:app"]

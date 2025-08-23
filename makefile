@@ -2,7 +2,7 @@ CXX_flag:=-O3 -std=c++17
 
 .PHONY: all clean lib
 
-all: solver.out
+all: solve.out
 clean:
 	make -C BreakSudoku clean
 	rm *.out
