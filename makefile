@@ -1,14 +1,18 @@
-CXX_flag:=-O3 -std=c++17
+.PHONY: all clean webasm
 
-.PHONY: all clean lib
-
-all: solve.out
+all: webasm
 clean:
-	make -C BreakSudoku clean
-	rm *.out
+	rm docs/sudoku.js
+	rm docs/sudoku.wasm
 
-lib:
-	make -C BreakSudoku
+docs/sudoku.js docs/sudoku.wasm: wasm_wrapper.cpp ./BreakSudokuC/sudoku_solver.c
+	emcc wasm_wrapper.cpp ./BreakSudokuC/sudoku_solver.c \
+	-O3 \
+    -s WASM \
+    -s MODULARIZE \
+    -s EXPORT_NAME="SudokuModule" \
+    -s EXPORT_ES6 \
+    --bind \
+    -o docs/sudoku.js
 
-solve.out: lib solve.cpp
-	g++ $(CXX_flag) -o solve.out solve.cpp BreakSudoku/Sudoku.o BreakSudoku/sudoku_complex_solver.o
+webasm: docs/sudoku.js docs/sudoku.wasm

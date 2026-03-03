@@ -1,14 +1,15 @@
-var mtx=Array(9);
-for(i=0;i<9;++i){
-    mtx[i]=Array(9);
-    for(j=0;j<9;++j) mtx[i][j]=0;
-}
+import SudokuModule from './sudoku.js';
+
+const Module = await SudokuModule();
+
+var mtx=Array(81);
+for(let i=0;i<81;++i) mtx[i]=0;
 
 var position_x=0,position_y=0;
 
 function update_n(n,x,y){
     const sudoku_cell=document.getElementById(`sudoku${x}${y}`);
-    mtx[x][y]=n;
+    mtx[x*9+y]=n;
     if(n>0) sudoku_cell.innerText=String(n);
     else sudoku_cell.innerText=" ";
 }
@@ -27,13 +28,13 @@ update_position(0,0);
 document.getElementById("erase").addEventListener("click",()=>{
     update_n(0,position_x,position_y);
 });
-for(i=0;i<9;++i){
+for(let i=0;i<9;++i){
     const nButton=document.getElementById(`n${i+1}`);
     nButton.addEventListener("click",(item=this)=>{
         const n=parseInt(item.target.id[1]);
         update_n(n,position_x,position_y);
     });
-    for(j=0;j<9;++j){
+    for(let j=0;j<9;++j){
         const sudoku_cell=document.getElementById(`sudoku${i}${j}`);
         sudoku_cell.addEventListener("click",(item=this)=>{
             const x=parseInt(item.target.id[6]);
@@ -44,7 +45,7 @@ for(i=0;i<9;++i){
 }
 
 document.addEventListener("keydown",(ev)=>{
-    for(n=1;n<=9;++n){
+    for(let n=1;n<=9;++n){
         if(ev.key==String(n)){
             update_n(n,position_x,position_y);
             return;
@@ -71,27 +72,16 @@ document.addEventListener("keydown",(ev)=>{
 });
 
 document.getElementById("submit").addEventListener("click",()=>{
-    fetch("/solve",{
-        method: "POST",
-        body: JSON.stringify(mtx),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-    .then((response)=>{return response.json()})
-    .then((data)=>{
-        for(i=0;i<9;++i){
-            for(j=0;j<9;++j) update_n(data["mtx"][i][j],i,j);
-        }
-        if(data["val"]){
-            document.getElementById("waring").style.visibility="visible";
-        }
-    });
+    const val = Module.checkSudoku(mtx);
+    for(let i=0;i<9;++i){
+        for(let j=0;j<9;++j) update_n(mtx[i*9+j],i,j);
+    }
+    if(val==0) document.getElementById("waring").style.visibility="visible";
 });
 
 document.getElementById("clear").addEventListener("click",()=>{
     document.getElementById("waring").style.visibility="hidden";
-    for(i=0;i<9;++i){
-        for(j=0;j<9;++j) update_n(0,i,j);
+    for(let i=0;i<9;++i){
+        for(let j=0;j<9;++j) update_n(0,i,j);
     }
 });
