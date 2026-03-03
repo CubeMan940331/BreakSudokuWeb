@@ -1,3 +1,3 @@
-[submodule "BreakSudoku"]
-	path = BreakSudoku
-	url = https://github.com/CubeMan940331/BreakSudoku.git
+[submodule "BreakSudokuC"]
+	path = BreakSudokuC
+	url = https://github.com/CubeMan940331/BreakSudokuC
